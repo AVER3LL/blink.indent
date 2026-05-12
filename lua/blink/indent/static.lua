@@ -37,6 +37,7 @@ function M.draw(winnr, bufnr, ns, indent_levels, whitespace_lens, range)
     local indent_level = indent_levels[line_number]
     if
       cache_entry.indent_levels[line_number] ~= indent_level
+      and indent_level >= config.static.min_indent_level
       and indent_level * shiftwidth > range.horizontal_offset
     then
       local virt_text = virt_text_cache[indent_level] or symbol:rep(indent_level)

@@ -38,7 +38,7 @@ function M.operator(side, add_to_jumplist)
 
   return function()
     local scope = parser.get_scope()
-    if scope.indent_level == 0 then return end
+    if scope.indent_level < config.scope.min_indent_level then return end
 
     -- needs remembering `count1` before adding to jump list because it seems to reset it to 1
     local count = vim.v.count1
@@ -63,7 +63,7 @@ function M.textobject(opts)
 
   return function()
     local scope = parser.get_scope()
-    if scope.indent_level == 0 then return end
+    if scope.indent_level < config.scope.min_indent_level then return end
 
     -- Make sequence of incremental selections
     local count = vim.v.count1

@@ -23,6 +23,7 @@
 --- @field char '┆' | '┊' | '╎' | '║' | '▏' | '▎' | string Character used to draw the scope guides
 --- @field whitespace_char '·' | '␣' | string | nil Character used to draw the whitespace guides. When `nil` (default), uses the value of `vim.opt.listchars:get().space` (see `:h listchars`)
 --- @field priority integer
+--- @field min_indent_level integer Minimum indent level to draw (1 = show all)
 --- @field highlights string[]
 
 --- @class (exact) blink.indent.StaticConfigPartial : blink.indent.StaticConfig, {}
@@ -30,6 +31,7 @@
 --- @class blink.indent.ScopeConfig
 --- @field enabled boolean Highlights highest level of indentation on the current line
 --- @field indent_at_cursor boolean Clamp to indent level of cursor
+--- @field min_indent_level integer Minimum indent level to highlight (1 = show all)
 --- @field ns integer Namespace of the extmarks used to draw the scope guides
 --- @field char '┆' | '┊' | '╎' | '║' | '▏' | '▎' | string Character used to draw the scope guides
 --- @field priority integer Priority of the extmarks used to draw the scope guides
@@ -76,6 +78,7 @@ local config = {
     char = '▎',
     whitespace_char = nil,
     priority = 1,
+    min_indent_level = 1,
     highlights = { 'BlinkIndent' },
   },
   scope = {
@@ -84,6 +87,7 @@ local config = {
     ns = vim.api.nvim_create_namespace('blink.indent.scope'),
     char = '▎',
     priority = 1000,
+    min_indent_level = 1,
     highlights = { 'BlinkIndentOrange', 'BlinkIndentViolet', 'BlinkIndentBlue' },
     underline = {
       enabled = false,

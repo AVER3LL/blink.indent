@@ -32,7 +32,7 @@ function M.draw(winnr, bufnr, ns, indent_levels, scope_range, range)
   vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1)
 
   local indent_level = scope_range.indent_level
-  if indent_level == 0 then return end
+  if indent_level < config.scope.min_indent_level then return end
 
   local win_col = (indent_level - 1) * utils.get_shiftwidth(bufnr) - range.horizontal_offset
   if win_col < 0 then return end
